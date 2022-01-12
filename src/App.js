@@ -1,7 +1,14 @@
 import './App.css';
+import Gameboard from './components/gameBoard.js';
+import scoreBoard from './components/scores.js';
 
 function App() {
-  return <div> hello world</div>;
+  return (
+    <div>
+      <scoreBoard />
+      <Gameboard />
+    </div>
+  );
 }
 
 export default App;
