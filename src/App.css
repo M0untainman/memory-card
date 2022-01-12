@@ -6,11 +6,23 @@ body {
   height: 8rem;
   background-color: darkblue;
   color: white;
+  padding: 0.5rem;
+  margin: 0.5rem;
 }
 
-.scoreboard {
+.cardHolder {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.ScoreBoard {
   background-color: grey;
   width: 10rem;
-  height: 5rem;
+  height: 3rem;
   color: white;
+  margin-left: auto;
+  margin-right: auto;
 }
