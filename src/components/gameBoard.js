@@ -4,18 +4,18 @@ import Card from './card.js';
 
 //  array to store card info
 let cardsArray = [
-  { key: 1, name: 'card 1' },
-  { key: 2, name: 'card 2' },
-  { key: 3, name: 'card 3' },
-  { key: 4, name: 'card 4' },
-  { key: 5, name: 'card 5' },
-  { key: 6, name: 'card 6' },
-  { key: 7, name: 'card 7' },
-  { key: 8, name: 'card 8' },
-  { key: 9, name: 'card 9' },
-  { key: 10, name: 'card 10' },
-  { key: 11, name: 'card 11' },
-  { key: 12, name: 'card 12' },
+  { key: 1, name: 'card 1', isClicked: false },
+  { key: 2, name: 'card 2', isClicked: false },
+  { key: 3, name: 'card 3', isClicked: false },
+  { key: 4, name: 'card 4', isClicked: false },
+  { key: 5, name: 'card 5', isClicked: false },
+  { key: 6, name: 'card 6', isClicked: false },
+  { key: 7, name: 'card 7', isClicked: false },
+  { key: 8, name: 'card 8', isClicked: false },
+  { key: 9, name: 'card 9', isClicked: false },
+  { key: 10, name: 'card 10', isClicked: false },
+  { key: 11, name: 'card 11', isClicked: false },
+  { key: 12, name: 'card 12', isClicked: false },
 ];
 
 // shuffle algorithim found online. search Fisher-yates shuffle
@@ -42,8 +42,33 @@ const shuffle = (array) => {
 // Gameboard component
 const Gameboard = () => {
   const [score, setScore] = useState(0);
-  const handleScoreChange = () => {
-    setScore(score + 1);
+  const [clicked, setClicked] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
+
+  const ClickedChange = (cardNum) => {
+    if (clicked[cardNum] === false) {
+      const newClicked = [...clicked];
+      newClicked[cardNum] = !newClicked[cardNum];
+      setScore(score + 1);
+      setClicked(newClicked);
+    } else {
+      const resetClicked = clicked.map((x) => false);
+      setClicked(resetClicked);
+      alert(`you lost. Your score was ${score}`);
+      setScore(0);
+    }
   };
   return (
     <div>
@@ -53,8 +78,9 @@ const Gameboard = () => {
           return (
             <Card
               key={card.key}
+              cardNum={card.key}
               whichCard={card.name}
-              changeScore={handleScoreChange}
+              onClickedChange={ClickedChange}
               score={score}
             ></Card>
           );

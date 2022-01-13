@@ -2,20 +2,13 @@ import React, { useState } from 'react';
 
 //card component
 const Card = (props) => {
-  const [clicked, setClicked] = useState(false);
-  const changeClicked = () => {
-    if (clicked === false) {
-      props.changeScore();
-      setClicked(true);
-    } else {
-      alert(`you lost. Your score was ${props.score}`);
-    }
+  const handleClickedChange = () => {
+    props.onClickedChange(props.cardNum);
   };
-
   return (
     <div
-      onClick={() => {
-        changeClicked();
+      onClick={(e) => {
+        handleClickedChange(e);
       }}
       className='card'
     >
