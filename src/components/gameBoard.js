@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import ScoreBoard from './scores.js';
 
 //shuffle algorithim found online. search Fisher-yates shuffle
 const shuffle = (array) => {
@@ -41,29 +42,46 @@ const Card = (props) => {
   const [clicked, setClicked] = useState(false);
   const changeClicked = () => {
     if (clicked === false) {
+      props.changeScore();
       setClicked(true);
     } else {
       console.log('already clicked');
     }
   };
-  const sayhi = () => {
-    alert('works');
-  };
 
   return (
-    <div onClick={changeClicked} className='card'>
-      {props.whichCard}
+    <div
+      onClick={() => {
+        changeClicked();
+      }}
+      className='card'
+    >
+      {props.whichCard} score is {props.score}
     </div>
   );
 };
 
 // Gameboard component
 const Gameboard = () => {
+  const [score, setScore] = useState(5);
+  const handleScoreChange = () => {
+    setScore(score + 1);
+  };
   return (
-    <div className='cardHolder'>
-      {shuffle(cards).map((card) => {
-        return <Card key={card.key} whichCard={card.name}></Card>;
-      })}
+    <div>
+      <ScoreBoard score={score} />
+      <div className='cardHolder'>
+        {shuffle(cards).map((card) => {
+          return (
+            <Card
+              key={card.key}
+              whichCard={card.name}
+              score={score}
+              changeScore={handleScoreChange}
+            ></Card>
+          );
+        })}
+      </div>
     </div>
   );
 };
