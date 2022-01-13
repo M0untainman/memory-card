@@ -8,7 +8,7 @@ const Card = (props) => {
       props.changeScore();
       setClicked(true);
     } else {
-      console.log('already clicked');
+      alert(`you lost. Your score was ${props.score}`);
     }
   };
 

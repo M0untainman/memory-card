@@ -55,6 +55,7 @@ const Gameboard = () => {
               key={card.key}
               whichCard={card.name}
               changeScore={handleScoreChange}
+              score={score}
             ></Card>
           );
         })}
